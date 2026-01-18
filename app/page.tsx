@@ -21,7 +21,7 @@ export default function Home() {
         try {
             let query = supabase
                 .from('companies')
-                .select('*', { count: 'exact' });
+                .select('*', { count: 'estimated' });
 
             // Apply filters
             // Apply filters
@@ -36,16 +36,15 @@ export default function Home() {
             }
 
             if (filters.region.length > 0) {
-                query = query.in('region', filters.region);
+                // Region column is empty, so we filter by address containing the prefecture name
+                // Supabase .or() syntax for multiple conditions: 'col.op.val,col.op.val'
+                const orClause = filters.region.map(r => `address.ilike.%${r}%`).join(',');
+                query = query.or(orClause);
             }
 
             // SNS Filters: Check if URL is not null
             if (filters.sns.length > 0) {
                 filters.sns.forEach(sns => {
-                    if (sns === 'x') {
-                        query = query.not('x_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('x_followers', filters.minFollowers);
-                    }
                     if (sns === 'instagram') {
                         query = query.not('insta_url', 'is', null);
                         if (filters.minFollowers) query = query.gte('insta_followers', filters.minFollowers);
@@ -57,14 +56,6 @@ export default function Home() {
                     if (sns === 'youtube') {
                         query = query.not('youtube_url', 'is', null);
                         if (filters.minFollowers) query = query.gte('youtube_subscribers', filters.minFollowers);
-                    }
-                    if (sns === 'facebook') {
-                        query = query.not('facebook_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('facebook_followers', filters.minFollowers);
-                    }
-                    if (sns === 'line') {
-                        query = query.not('line_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('line_friends', filters.minFollowers);
                     }
                 });
             }
@@ -125,7 +116,7 @@ export default function Home() {
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg"></div>
                         <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-pink-600">
-                            J-Corp DB
+                            アカリスト
                         </span>
                     </div>
                     <nav className="text-sm font-medium text-gray-500">
@@ -144,7 +135,7 @@ export default function Home() {
                     </h1>
                     <p className="max-w-xl mx-auto text-lg text-gray-600">
                         業種、地域、SNS運用状況でピンポイント検索。<br />
-                        1件10円。会員登録不要で即購入可能です。
+                        1件15円。会員登録不要で即購入可能です。
                     </p>
                 </div>
 

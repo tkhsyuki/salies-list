@@ -6,46 +6,42 @@ export default function LpSections() {
             {/* Features Section */}
             <section>
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                        J-Corp DB が選ばれる<br className="sm:hidden" />
-                        <span className="text-orange-500">3つの理由</span>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                        アカリスト が選ばれる3つの理由
                     </h2>
-                    <p className="mt-4 text-xl text-gray-500">
+                    <p className="text-gray-600">
                         マーケティングリスト作成の手間をゼロに。
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 text-center hover:shadow-md transition-shadow">
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Share2 className="w-8 h-8 text-blue-600" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-6">
+                            <Share2 className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 mb-3">SNS活用企業に特化</h3>
-                        <p className="text-gray-500">
-                            X, Instagram, TikTokなど、SNSアカウントを持つ企業のみを厳選。
-                            インフルエンサーマーケティングやSNS広告の営業先に最適です。
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                            X, Instagram, TikTokなど、SNSアカウントを持つ企業のみを厳選。インフルエンサーマーケティングやSNS広告の営業先に最適です。
                         </p>
                     </div>
 
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 text-center hover:shadow-md transition-shadow">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <Zap className="w-8 h-8 text-green-600" />
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-6">
+                            <Zap className="w-8 h-8" />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">1件10円の低価格</h3>
-                        <p className="text-gray-500">
-                            月額費用は一切不要。必要なリストを必要な分だけ、
-                            業界最安値水準の1件10円で購入できます。
+                        <h3 className="text-xl font-bold text-gray-900 mb-3">1件15円の低価格</h3>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                            月額費用は一切不要。必要なリストを必要な分だけ、業界最安値水準の1件15円で購入できます。
                         </p>
                     </div>
 
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-orange-100 text-center hover:shadow-md transition-shadow">
-                        <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <UserX className="w-8 h-8 text-purple-600" />
+                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                        <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-6">
+                            <UserX className="w-8 h-8" />
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 mb-3">会員登録不要</h3>
-                        <p className="text-gray-500">
-                            面倒な会員登録や審査は一切ありません。
-                            検索からダウンロードまで最短5分で完了します。
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                            面倒な会員登録や審査は一切ありません。検索からダウンロードまで最短5分で完了します。
                         </p>
                     </div>
                 </div>
@@ -165,7 +161,7 @@ export default function LpSections() {
                             最低購入件数はありますか？
                         </h3>
                         <p className="text-gray-600 ml-7">
-                            はい、システム利用料の関係上、最低100件（1,000円）からのご購入とさせていただいております。
+                            はい、システム利用料の関係上、最低100件（1,500円）からのご購入とさせていただいております。
                             検索結果が100件未満の場合は条件を緩和して再検索してください。
                         </p>
                     </div>

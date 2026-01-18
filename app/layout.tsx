@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Sales List Platform",
-    description: "Find and buy company data easily.",
+    title: "アカリスト | 企業SNSリスト作成ツール",
+    description: "企業SNSのリスト作成を好きな条件で好きなだけ。会員登録不要で即購入可能な営業リスト作成ツールです。",
 };
 
 import SiteFooter from "@/components/site-footer";

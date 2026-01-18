@@ -1,6 +1,6 @@
-'use client';
-
+import { useState } from 'react';
 import { Company } from '@/lib/types';
+import Link from 'next/link';
 import { Lock, CheckCircle } from 'lucide-react';
 
 interface ResultPreviewProps {
@@ -11,7 +11,8 @@ interface ResultPreviewProps {
 }
 
 export default function ResultPreview({ count, loading, samples, onCheckout }: ResultPreviewProps) {
-    const pricePerItem = 10;
+    const [agreed, setAgreed] = useState(false);
+    const pricePerItem = 15;
     const totalPrice = count * pricePerItem;
     const canPurchase = count >= 100;
 
@@ -23,6 +24,17 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
             </div>
         );
     }
+
+    // Helper to extract prefecture from address
+    const getPrefecture = (addr: string | null) => {
+        if (!addr) return null;
+        // Match any prefecture name occurring in the address
+        // Handles "東京都", "北海道", "大阪府", "京都府"
+        // And "神奈川県" (3 Kanji + 県) or "福岡県" (2 Kanji + 県)
+        // Uses [一-龠] to ensure only Kanji are matched, preventing numbers like "8福岡県"
+        const match = addr.match(/(北海道|東京都|大阪府|京都府|[一-龠]{2,3}県)/);
+        return match ? match[0] : null;
+    };
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
@@ -49,16 +61,13 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                         <div key={company.id} className="p-3 bg-gray-50 rounded-lg border border-gray-100 flex items-start justify-between">
                             <div>
                                 <div className="flex items-center gap-2 mb-1">
-                                    <span className="font-bold text-gray-700">{company.company_name.substring(0, 3)}...</span>
+                                    <span className="font-bold text-gray-700">{company.company_name.substring(0, 10)}...</span>
                                     <span className="text-[10px] px-2 py-0.5 bg-gray-200 text-gray-600 rounded-full">{company.industry}</span>
-                                    <span className="text-[10px] px-2 py-0.5 bg-gray-200 text-gray-600 rounded-full">{company.region}</span>
+                                    <span className="text-[10px] px-2 py-0.5 bg-gray-200 text-gray-600 rounded-full">
+                                        {getPrefecture(company.address) || company.region}
+                                    </span>
                                 </div>
                                 <div className="flex items-center gap-3 text-xs text-gray-500">
-                                    {company.x_url && (
-                                        <span className="text-blue-400 font-medium flex items-center gap-1">
-                                            X (Twitter) <span className="text-gray-400">({company.x_followers?.toLocaleString()})</span>
-                                        </span>
-                                    )}
                                     {company.insta_url && (
                                         <span className="text-pink-500 font-medium flex items-center gap-1">
                                             Instagram <span className="text-gray-400">({company.insta_followers?.toLocaleString()})</span>
@@ -72,16 +81,6 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                                     {company.youtube_url && (
                                         <span className="text-red-600 font-medium flex items-center gap-1">
                                             YouTube <span className="text-gray-400">({company.youtube_subscribers?.toLocaleString()})</span>
-                                        </span>
-                                    )}
-                                    {company.facebook_url && (
-                                        <span className="text-blue-700 font-medium flex items-center gap-1">
-                                            Facebook <span className="text-gray-400">({company.facebook_followers?.toLocaleString()})</span>
-                                        </span>
-                                    )}
-                                    {company.line_url && (
-                                        <span className="text-green-500 font-medium flex items-center gap-1">
-                                            LINE <span className="text-gray-400">({company.line_friends?.toLocaleString()})</span>
                                         </span>
                                     )}
                                 </div>
@@ -113,10 +112,24 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                     )}
                 </div>
 
+                <div className="mb-4 flex items-center gap-2">
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        checked={agreed}
+                        onChange={(e) => setAgreed(e.target.checked)}
+                        className="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                    />
+                    <label htmlFor="terms" className="text-sm text-gray-300 select-none cursor-pointer">
+                        <Link href="/legal/terms" target="_blank" className="underline hover:text-white">利用規約</Link>
+                        に同意して購入する
+                    </label>
+                </div>
+
                 <button
                     onClick={onCheckout}
-                    disabled={!canPurchase}
-                    className={`w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${canPurchase
+                    disabled={!canPurchase || !agreed}
+                    className={`w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${canPurchase && agreed
                         ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 hover:scale-[1.02] shadow-lg'
                         : 'bg-gray-700 text-gray-500 cursor-not-allowed'
                         }`}

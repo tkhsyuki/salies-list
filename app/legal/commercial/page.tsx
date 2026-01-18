@@ -7,8 +7,12 @@ export default function CommercialPage() {
                 <table className="w-full text-left text-sm text-gray-600">
                     <tbody className="divide-y divide-gray-200">
                         <tr>
+                            <th className="bg-gray-50 px-6 py-4 font-medium w-1/3">サービス名</th>
+                            <td className="px-6 py-4">アカリスト</td>
+                        </tr>
+                        <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium w-1/3">販売事業者名</th>
-                            <td className="px-6 py-4">J-Corp DB 運営事務局</td>
+                            <td className="px-6 py-4">アカリスト運営事務局</td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">運営統括責任者</th>
@@ -16,11 +20,14 @@ export default function CommercialPage() {
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">所在地</th>
-                            <td className="px-6 py-4">東京都渋谷区...（所在地を記載）</td>
+                            <td className="px-6 py-4">特定商取引法に基づき、消費者からの請求がある場合、遅滞なく開示いたします。</td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">お問い合わせ</th>
-                            <td className="px-6 py-4">support@example.com / 03-XXXX-XXXX</td>
+                            <td className="px-6 py-4">
+                                support@example.com<br />
+                                <span className="text-xs text-gray-500">※電話番号については、特定商取引法に基づき、消費者からの請求がある場合、遅滞なく開示いたします。</span>
+                            </td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">販売価格</th>

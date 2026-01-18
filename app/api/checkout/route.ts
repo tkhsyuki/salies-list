@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         // Re-verify count on server side (Simplified for hackathon/MVP)
         // Ideally duplicate the query logic here to ensure 'count' matches 'filters'
 
-        const pricePerItem = 10;
+        const pricePerItem = 15;
         const amount = count * pricePerItem;
 
         const session = await stripe.checkout.sessions.create({

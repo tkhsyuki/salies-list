@@ -23,23 +23,92 @@ export default function AdminImportPage() {
                 if (!text) return resolve([]);
 
                 const lines = text.split(/\r\n|\n/);
-                const headers = lines[0].split(',').map(h => h.trim());
+                // Handle headers - assuming simple CSV for headers or same logic
+                // Better to use the same logic for headers too if they might be quoted
+                const parseLine = (line: string) => {
+                    const result = [];
+                    let start = 0;
+                    let inQuotes = false;
+                    for (let i = 0; i < line.length; i++) {
+                        if (line[i] === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (line[i] === ',' && !inQuotes) {
+                            let val = line.substring(start, i).trim();
+                            // Remove surrounding quotes if present
+                            if (val.startsWith('"') && val.endsWith('"')) {
+                                val = val.substring(1, val.length - 1).replace(/""/g, '"');
+                            }
+                            result.push(val);
+                            start = i + 1;
+                        }
+                    }
+                    // Add last field
+                    let val = line.substring(start).trim();
+                    if (val.startsWith('"') && val.endsWith('"')) {
+                        val = val.substring(1, val.length - 1).replace(/""/g, '"');
+                    }
+                    result.push(val);
+                    return result;
+                };
+
+                const headers = parseLine(lines[0]);
                 const result = [];
 
                 for (let i = 1; i < lines.length; i++) {
                     if (!lines[i].trim()) continue;
+
+                    const currentline = parseLine(lines[i]);
                     const obj: any = {};
-                    // Handle simple CSV (no quoted commas support for this MVP)
-                    const currentline = lines[i].split(',');
 
-                    // Mapping headers to DB columns (assumes CSV headers match or we map them)
-                    // Ideally should be robust mapping. For MVP we assume CSV strictly follows schema
-                    // company_name,industry,region,address,employee_count,website_url,description,...
-
-                    // Or easier: Just use column names in CSV
                     for (let j = 0; j < headers.length; j++) {
-                        if (currentline[j] !== undefined) {
-                            obj[headers[j]] = currentline[j].trim();
+                        if (j < currentline.length) {
+                            let val: string | null = currentline[j];
+                            // Convert empty strings to null to ensure DB compatibility for non-string types
+                            if (val === '') {
+                                val = null;
+                            }
+
+                            const header = headers[j];
+                            // Skip 'id' column to let DB generate UUIDs, and skip 'Unnamed' columns
+                            if (header && !header.startsWith('Unnamed') && header.toLowerCase() !== 'id') {
+                                // Fix integer columns having "0.0" or "100.0"
+                                if (val && val.endsWith('.0') && !isNaN(parseFloat(val))) {
+                                    val = val.slice(0, -2);
+                                }
+
+                                // Strict integer sanitization for numeric columns
+                                if (['employee_count', 'x_followers', 'insta_followers', 'tiktok_followers', 'youtube_subscribers', 'facebook_followers', 'line_friends'].includes(header)) {
+                                    if (val) {
+                                        // Remove non-numeric chars (except dot if we want to handle floats again, but we just want int)
+                                        // Actually some might be "1,000" -> "1000"
+                                        const numStr = val.toString().replace(/[^0-9.]/g, '');
+                                        let num = parseInt(numStr, 10);
+
+                                        // Handle NaN
+                                        if (isNaN(num)) {
+                                            num = 0;
+                                        }
+
+                                        // Clamp to Postgres Integer Max (2,147,483,647) to avoid "out of range" errors
+                                        const MAX_INT = 2147483647;
+                                        if (num > MAX_INT) {
+                                            num = MAX_INT;
+                                        }
+
+                                        val = num.toString();
+                                    } else {
+                                        val = '0';
+                                    }
+                                }
+
+                                // Handle required fields (NOT NULL in DB)
+                                // If empty, populate with dummy value to avoid constraint error
+                                if (val === null && ['company_name', 'industry', 'region'].includes(header)) {
+                                    val = '-';
+                                }
+
+                                obj[header] = val;
+                            }
                         }
                     }
                     result.push(obj);
@@ -58,21 +127,41 @@ export default function AdminImportPage() {
 
         try {
             const data = await parseCSV(file);
+            const BATCH_SIZE = 500;
+            const totalBatches = Math.ceil(data.length / BATCH_SIZE);
+            let successCount = 0;
 
-            const response = await fetch('/api/admin/import', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ companies: data }),
-            });
+            for (let i = 0; i < totalBatches; i++) {
+                const start = i * BATCH_SIZE;
+                const end = start + BATCH_SIZE;
+                const batch = data.slice(start, end);
 
-            if (!response.ok) throw new Error('Upload failed');
+                setStatus({
+                    type: 'success', // using success style for progress
+                    message: `Importing batch ${i + 1}/${totalBatches} (${Math.round((i / totalBatches) * 100)}%)...`
+                });
 
-            const result = await response.json();
-            setStatus({ type: 'success', message: `${result.count} items imported successfully!` });
+                const response = await fetch('/api/admin/import', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ companies: batch }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    console.error(`Batch ${i + 1} failed:`, errorData);
+                    throw new Error(`Batch ${i + 1} failed: ${errorData.error || response.statusText}`);
+                }
+
+                const result = await response.json();
+                successCount += (result.count || 0);
+            }
+
+            setStatus({ type: 'success', message: `Completed! ${successCount} items imported successfully.` });
             setFile(null);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            setStatus({ type: 'error', message: 'Failed to import data. Check CSV format.' });
+            setStatus({ type: 'error', message: error.message || 'Failed to import data.' });
         } finally {
             setUploading(false);
         }

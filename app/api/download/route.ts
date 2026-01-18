@@ -38,22 +38,30 @@ export async function GET(req: Request) {
         let query = supabase.from('companies').select('*');
 
         if (filters.keyword) {
-            query = query.or(`company_name.ilike.%${filters.keyword}%,description.ilike.%${filters.keyword}%`);
+            const kw = filters.keyword;
+            query = query.or(`company_name.ilike.%${kw}%,description.ilike.%${kw}%,keyword1.ilike.%${kw}%,keyword2.ilike.%${kw}%,keyword3.ilike.%${kw}%,keyword4.ilike.%${kw}%,keyword5.ilike.%${kw}%`);
         }
         if (filters.industry && filters.industry.length > 0) {
             query = query.in('industry', filters.industry);
         }
         if (filters.region && filters.region.length > 0) {
-            query = query.in('region', filters.region);
+            const orClause = filters.region.map(r => `address.ilike.%${r}%`).join(',');
+            query = query.or(orClause);
         }
         if (filters.sns && filters.sns.length > 0) {
             filters.sns.forEach(sns => {
-                if (sns === 'x') query = query.not('x_url', 'is', null);
-                if (sns === 'instagram') query = query.not('insta_url', 'is', null);
-                if (sns === 'tiktok') query = query.not('tiktok_url', 'is', null);
-                if (sns === 'youtube') query = query.not('youtube_url', 'is', null);
-                if (sns === 'facebook') query = query.not('facebook_url', 'is', null);
-                if (sns === 'line') query = query.not('line_url', 'is', null);
+                if (sns === 'instagram') {
+                    query = query.not('insta_url', 'is', null);
+                    if (filters.minFollowers) query = query.gte('insta_followers', filters.minFollowers);
+                }
+                if (sns === 'tiktok') {
+                    query = query.not('tiktok_url', 'is', null);
+                    if (filters.minFollowers) query = query.gte('tiktok_followers', filters.minFollowers);
+                }
+                if (sns === 'youtube') {
+                    query = query.not('youtube_url', 'is', null);
+                    if (filters.minFollowers) query = query.gte('youtube_subscribers', filters.minFollowers);
+                }
             });
         }
 
@@ -65,13 +73,27 @@ export async function GET(req: Request) {
         }
 
         // 3. Generate CSV
+        // Define dynamic columns
+        const snsColumns = [
+            { id: 'instagram', headers: ['Insta URL', 'Instaフォロワー'], getters: [(c: any) => c.insta_url || '', (c: any) => c.insta_followers || ''] },
+            { id: 'tiktok', headers: ['TikTok URL', 'TikTokフォロワー'], getters: [(c: any) => c.tiktok_url || '', (c: any) => c.tiktok_followers || ''] },
+            { id: 'youtube', headers: ['Youtube URL', 'Youtube登録者数'], getters: [(c: any) => c.youtube_url || '', (c: any) => c.youtube_subscribers || ''] },
+        ];
+
+        // Determine which SNS columns to include
+        // If filters.sns is empty, include ALL. If not, include only selected.
+        const activeSns = (filters.sns && filters.sns.length > 0)
+            ? snsColumns.filter(col => filters.sns.includes(col.id))
+            : snsColumns;
+
         const headers = [
             '企業名', '業種', '地域', '住所', '従業員数', '会社HP', '企業概要',
-            'X URL', 'Xフォロワー', 'Insta URL', 'Instaフォロワー',
-            'TikTok URL', 'Youtube URL', 'Facebook URL', 'LINE URL'
+            ...activeSns.flatMap(col => col.headers)
         ].join(',');
 
         const rows = companies.map(c => {
+            const snsValues = activeSns.flatMap(col => col.getters.map(g => g(c)));
+
             return [
                 c.company_name,
                 c.industry,
@@ -80,12 +102,7 @@ export async function GET(req: Request) {
                 c.employee_count || '',
                 c.website_url || '',
                 `"${(c.description || '').replace(/"/g, '""')}"`, // escape quotes
-                c.x_url || '', c.x_followers || '',
-                c.insta_url || '', c.insta_followers || '',
-                c.tiktok_url || '',
-                c.youtube_url || '',
-                c.facebook_url || '',
-                c.line_url || ''
+                ...snsValues
             ].join(',');
         });
 

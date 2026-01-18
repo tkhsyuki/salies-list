@@ -1,0 +1,11 @@
+Columns: ['id', 'company_name', 'industry', 'region', 'address', 'employee_count', 'description', 'website_url', 'x_url', 'x_followers', 'insta_url', 'insta_followers', 'tiktok_url', 'tiktok_followers', 'youtube_url', 'youtube_subscribers', 'facebook_url', 'facebook_followers', 'line_url', 'line_friends', 'created_at', 'updated_at', 'keyword1', 'keyword2', 'keyword3', 'keyword4', 'keyword5', 'Unnamed: 27']
+東日本旅客鉄道株式会社: https://www.jreast.co.jp/company/
+株式会社グリーンハウス: http://www.greenhouse.co.jp/index_pc.html
+西日本旅客鉄道株式会社: https://www.westjr.co.jp/
+株式会社リクルート: https://www.recruit.co.jp/
+東海旅客鉄道株式会社: http://www.jr-central.co.jp/
+大和ハウス工業株式会社: https://www.daiwahouse.co.jp/index.html
+ルートインジャパン株式会社: https://www.route-inn.co.jp/
+株式会社ＪＴＢ: https://www.jtbcorp.jp/jp/
+日本航空株式会社: https://www.jal.com/ja/
+株式会社東横イン: http://www.toyoko-inn.com/

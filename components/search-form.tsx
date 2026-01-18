@@ -4,15 +4,24 @@ import { useState } from 'react';
 import { SearchFilters } from '@/lib/types';
 import { Search, Filter, X } from 'lucide-react';
 
-const INDUSTRIES = ['IT', 'Manufacturing', 'Retail', 'Finance', 'Healthcare', 'Real Estate', 'Service'];
-const REGIONS = ['Hokkaido', 'Tohoku', 'Kanto', 'Tokyo', 'Chubu', 'Kinki', 'Osaka', 'Chugoku', 'Shikoku', 'Kyushu'];
+const INDUSTRIES = [
+    'Webサービス・アプリ運営業界の会社', 'システム受託開発業界の会社', 'システム開発業界の会社',
+    '家電業界の会社', '高齢者向け福祉業界の会社', 'マンション・アパート賃貸業界の会社',
+    '紙媒体印刷業界の会社', 'ホテル・旅館業界の会社', 'その他不動産管理業界の会社',
+    '専門事務所業界の会社', 'その他スクール業界の会社', '調剤薬局業界の会社',
+    '携帯・通信回線販売代理店業界の会社', '高齢者住宅業界の会社', 'Web制作業界の会社',
+    'マンション・アパート売買業界の会社', 'デザイン業界の会社', '金属加工請負業界の会社',
+    '警備業界の会社', '照明器具業界の会社'
+];
+
+const REGIONS = [
+    '北海道', '宮城県', '東京都', '神奈川県', '埼玉県', '千葉県',
+    '愛知県', '静岡県', '大阪府', '京都府', '兵庫県', '広島県', '福岡県'
+];
 const SOCIALS = [
-    { id: 'x', label: 'X (Twitter)' },
     { id: 'instagram', label: 'Instagram' },
     { id: 'tiktok', label: 'TikTok' },
     { id: 'youtube', label: 'YouTube' },
-    { id: 'facebook', label: 'Facebook' },
-    { id: 'line', label: 'LINE' },
 ];
 
 export default function SearchForm({ onSearch }: { onSearch: (filters: SearchFilters) => void }) {
