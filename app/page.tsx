@@ -7,6 +7,8 @@ import ResultPreview from '@/components/result-preview';
 import LpSections from '@/components/lp-sections';
 import { Company, SearchFilters } from '@/lib/types';
 
+import JsonLd from '@/components/json-ld';
+
 export default function Home() {
     const [loading, setLoading] = useState(false);
     const [totalCount, setTotalCount] = useState(0);
@@ -110,12 +112,13 @@ export default function Home() {
 
     return (
         <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+            <JsonLd />
             {/* Header */}
             <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg"></div>
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-pink-600">
+                        <img src="/logo.png" alt="Acalist Logo" className="w-8 h-8 rounded-lg object-contain" />
+                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-600 to-emerald-600">
                             アカリスト
                         </span>
                     </div>
@@ -128,14 +131,14 @@ export default function Home() {
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-extrabold text-gray-900 mb-4 sm:text-5xl">
-                        必要な企業リストを、<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-pink-500">
-                            必要な分だけダウンロード
+                        SNSアカウントを持つ企業のリストを<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-500 to-emerald-500">
+                            会員登録不要で即ダウンロード
                         </span>
                     </h1>
                     <p className="max-w-xl mx-auto text-lg text-gray-600">
-                        業種、地域、SNS運用状況でピンポイント検索。<br />
-                        1件15円。会員登録不要で即購入可能です。
+                        業種・地域・フォロワー数など、好きな条件でピンポイント検索。<br />
+                        営業に必要なリストを、1件15円から今すぐ入手できます。
                     </p>
                 </div>
 

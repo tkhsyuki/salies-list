@@ -21,7 +21,7 @@ export default function LpSections() {
                         </div>
                         <h3 className="text-xl font-bold text-gray-900 mb-3">SNS活用企業に特化</h3>
                         <p className="text-gray-600 text-sm leading-relaxed">
-                            X, Instagram, TikTokなど、SNSアカウントを持つ企業のみを厳選。インフルエンサーマーケティングやSNS広告の営業先に最適です。
+                            X, Instagram（インスタ）, TikTokなど、SNSアカウントを持つ企業のみを厳選。インフルエンサーマーケティングやSNS広告の営業先に最適です。
                         </p>
                     </div>
 
@@ -79,9 +79,9 @@ export default function LpSections() {
                         <div className="relative">
                             <div className="text-center">
                                 <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <CheckCircle className="w-8 h-8 text-green-400" />
+                                    <CheckCircle className="w-8 h-8 text-lime-400" />
                                 </div>
-                                <div className="text-sm font-bold text-green-400 mb-2">STEP 02</div>
+                                <div className="text-sm font-bold text-lime-400 mb-2">STEP 02</div>
                                 <h3 className="text-xl font-bold mb-2">件数・金額確認</h3>
                                 <p className="text-gray-400 text-sm">
                                     抽出された件数と金額を確認<br />（5件までプレビュー可能）
@@ -95,9 +95,9 @@ export default function LpSections() {
                         <div className="relative">
                             <div className="text-center">
                                 <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <CreditCard className="w-8 h-8 text-yellow-400" />
+                                    <CreditCard className="w-8 h-8 text-emerald-400" />
                                 </div>
-                                <div className="text-sm font-bold text-yellow-400 mb-2">STEP 03</div>
+                                <div className="text-sm font-bold text-emerald-400 mb-2">STEP 03</div>
                                 <h3 className="text-xl font-bold mb-2">お支払い</h3>
                                 <p className="text-gray-400 text-sm">
                                     クレジットカードで<br />安全に決済（Stripe連携）
@@ -111,9 +111,9 @@ export default function LpSections() {
                         <div className="relative">
                             <div className="text-center">
                                 <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <Download className="w-8 h-8 text-pink-400" />
+                                    <Download className="w-8 h-8 text-lime-500" />
                                 </div>
-                                <div className="text-sm font-bold text-pink-400 mb-2">STEP 04</div>
+                                <div className="text-sm font-bold text-lime-500 mb-2">STEP 04</div>
                                 <h3 className="text-xl font-bold mb-2">ダウンロード</h3>
                                 <p className="text-gray-400 text-sm">
                                     決済完了後、すぐに<br />CSVファイルをダウンロード
@@ -135,7 +135,7 @@ export default function LpSections() {
                 <div className="space-y-6">
                     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                         <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-orange-500" />
+                            <HelpCircle className="w-5 h-5 text-lime-600" />
                             領収書は発行されますか？
                         </h3>
                         <p className="text-gray-600 ml-7">
@@ -146,7 +146,7 @@ export default function LpSections() {
 
                     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                         <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-orange-500" />
+                            <HelpCircle className="w-5 h-5 text-lime-600" />
                             どのような企業データが含まれていますか？
                         </h3>
                         <p className="text-gray-600 ml-7">
@@ -157,7 +157,7 @@ export default function LpSections() {
 
                     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                         <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-orange-500" />
+                            <HelpCircle className="w-5 h-5 text-lime-600" />
                             最低購入件数はありますか？
                         </h3>
                         <p className="text-gray-600 ml-7">

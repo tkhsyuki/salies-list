@@ -67,6 +67,24 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                                         {getPrefecture(company.address) || company.region}
                                     </span>
                                 </div>
+
+                                {company.website_url && (
+                                    <div className="mb-2 text-xs">
+                                        <a
+                                            href={company.website_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-blue-600 hover:underline flex items-center gap-1.5 w-fit"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <svg className="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                            <span className="truncate max-w-[280px] sm:max-w-md">{company.website_url}</span>
+                                        </a>
+                                    </div>
+                                )}
+
                                 <div className="flex items-center gap-3 text-xs text-gray-500">
                                     {company.insta_url && (
                                         <span className="text-pink-500 font-medium flex items-center gap-1">
@@ -112,13 +130,21 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                     )}
                 </div>
 
+                {/* Sample Download */}
+                <a
+                    href="/api/download-sample"
+                    className="block w-full text-center text-sm text-lime-400 hover:text-lime-300 underline mb-6 transition-colors"
+                >
+                    まずは無料サンプル(3件)をダウンロード
+                </a>
+
                 <div className="mb-4 flex items-center gap-2">
                     <input
                         type="checkbox"
                         id="terms"
                         checked={agreed}
                         onChange={(e) => setAgreed(e.target.checked)}
-                        className="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
+                        className="w-4 h-4 rounded border-gray-300 text-lime-600 focus:ring-lime-500"
                     />
                     <label htmlFor="terms" className="text-sm text-gray-300 select-none cursor-pointer">
                         <Link href="/legal/terms" target="_blank" className="underline hover:text-white">利用規約</Link>
@@ -130,7 +156,7 @@ export default function ResultPreview({ count, loading, samples, onCheckout }: R
                     onClick={onCheckout}
                     disabled={!canPurchase || !agreed}
                     className={`w-full py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${canPurchase && agreed
-                        ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 hover:scale-[1.02] shadow-lg'
+                        ? 'bg-gradient-to-r from-lime-400 to-emerald-500 text-gray-900 hover:scale-[1.02] shadow-lg'
                         : 'bg-gray-700 text-gray-500 cursor-not-allowed'
                         }`}
                 >

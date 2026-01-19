@@ -6,9 +6,25 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "アカリスト | 企業SNSリスト作成ツール",
-    description: "企業SNSのリスト作成を好きな条件で好きなだけ。会員登録不要で即購入可能な営業リスト作成ツールです。",
+    description: "企業SNS（Instagram/インスタ・TikTok・YouTube・X）の営業リスト作成ツール。フォロワー数やアカウント有無で絞り込み、会員登録不要で即ダウンロード。1件15円からの高精度な企業リスト。",
+    keywords: ["SNS", "TikTok", "Instagram", "インスタ", "YouTube", "営業リスト", "フォロワー", "アカウント", "企業リスト", "Acalist"],
+    metadataBase: new URL('https://acalist.jp'),
+    openGraph: {
+        title: "アカリスト | 企業SNSリスト作成ツール",
+        description: "企業SNS（Instagram/インスタ・TikTok・YouTube・X）の営業リスト作成ツール。フォロワー数やアカウント有無で絞り込み、会員登録不要で即ダウンロード。",
+        url: 'https://acalist.jp',
+        siteName: 'Acalist',
+        locale: 'ja_JP',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: "アカリスト | 企業SNSリスト作成ツール",
+        description: "企業SNS（Instagram/インスタ・TikTok・YouTube・X）の営業リスト作成ツール。フォロワー数やアカウント有無で絞り込み、会員登録不要で即ダウンロード。",
+    },
 };
 
+import Analytics from "@/components/analytics";
 import SiteFooter from "@/components/site-footer";
 
 export default function RootLayout({
@@ -19,6 +35,7 @@ export default function RootLayout({
     return (
         <html lang="ja">
             <body className={inter.className}>
+                <Analytics />
                 <div className="flex flex-col min-h-screen">
                     {children}
                     <SiteFooter />

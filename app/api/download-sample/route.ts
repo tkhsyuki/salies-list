@@ -1,0 +1,26 @@
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+    // Match headers with actual export (app/api/download/route.ts)
+    const headers = [
+        '企業名', '業種', '住所', '従業員数', '会社HP',
+        'Insta URL', 'Instaフォロワー', 'TikTok URL', 'TikTokフォロワー', 'Youtube URL', 'Youtube登録'
+    ].join(',');
+
+    const rows = [
+        '株式会社サンプル商事,Webサービス・アプリ運営業界の会社,東京都渋谷区...,100,https://example.com,https://instagram.com/sample,15000,https://tiktok.com/@sample,5000,,0',
+        'テックイノベーション株式会社,システム開発業界の会社,大阪府大阪市...,50,https://tech-sample.jp,,0,https://tiktok.com/@tech,1200,https://youtube.com/c/tech,500',
+        'カフェ・デ・サンプル,ホテル・旅館業界の会社,京都府京都市...,10,https://cafe-sample.net,https://instagram.com/cafe,3000,,,,0',
+        '', // Empty row separator
+        '※SNS列は、検索条件で選択したSNSのみダウンロードされます。未選択のSNS列は実際の購入データには含まれません。,,,,,,,,,,,,'
+    ];
+
+    const csvContent = '\uFEFF' + [headers, ...rows].join('\n'); // Add BOM
+
+    return new NextResponse(csvContent, {
+        headers: {
+            'Content-Type': 'text/csv; charset=utf-8',
+            'Content-Disposition': 'attachment; filename="acalist_sample.csv"',
+        },
+    });
+}

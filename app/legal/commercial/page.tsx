@@ -16,7 +16,7 @@ export default function CommercialPage() {
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">運営統括責任者</th>
-                            <td className="px-6 py-4">山田 太郎（代表）</td>
+                            <td className="px-6 py-4">タカハシ　ユウキ</td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">所在地</th>
@@ -25,13 +25,13 @@ export default function CommercialPage() {
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">お問い合わせ</th>
                             <td className="px-6 py-4">
-                                support@example.com<br />
+                                info@acalist.jp<br />
                                 <span className="text-xs text-gray-500">※電話番号については、特定商取引法に基づき、消費者からの請求がある場合、遅滞なく開示いたします。</span>
                             </td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">販売価格</th>
-                            <td className="px-6 py-4">サイト内の各購入ページに記載（1件10円〜）</td>
+                            <td className="px-6 py-4">サイト内の各購入ページに記載（1件15円〜）<br /><span className="text-sm text-gray-500">※最低100件から購入可能</span></td>
                         </tr>
                         <tr>
                             <th className="bg-gray-50 px-6 py-4 font-medium">商品代金以外の必要料金</th>

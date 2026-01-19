@@ -8,13 +8,14 @@ export default function SiteFooter() {
                     {/* Branding */}
                     <div className="mt-8 md:mt-0 md:order-1">
                         <div className="flex items-center gap-2 mb-4 md:mb-0">
-                            <div className="w-6 h-6 bg-gradient-to-br from-orange-500 to-pink-500 rounded-md"></div>
+                            <img src="/logo.png" alt="Acalist Logo" className="w-6 h-6 rounded-md object-contain" />
                             <span className="font-bold text-lg text-gray-800">アカリスト</span>
                         </div>
                     </div>
 
                     {/* Legal Links */}
                     <div className="flex gap-6 text-sm text-gray-500 md:order-2">
+                        <Link href="/contact" className="hover:text-gray-900">お問い合わせ</Link>
                         <Link href="/legal/terms" className="hover:text-gray-900">利用規約</Link>
                         <Link href="/legal/privacy" className="hover:text-gray-900">プライバシーポリシー</Link>
                         <Link href="/legal/commercial" className="hover:text-gray-900">特定商取引法に基づく表記</Link>
