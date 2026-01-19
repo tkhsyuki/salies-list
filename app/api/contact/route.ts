@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         // 3. Send Email
         const { data, error } = await resend.emails.send({
             from: 'Acalist Contact <onboarding@resend.dev>', // Update this if user has a domain
-            to: ['delivery@resend.dev'], // Send to verified address or self. For dev: delivery@resend.dev works
+            to: ['info@acalist.jp'], // Send to verified address or self. For dev: delivery@resend.dev works
             subject: `[Acalist] お問い合わせ: ${name}様`,
             html: `
                 <h2>新しいお問い合わせ</h2>

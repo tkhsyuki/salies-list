@@ -44,7 +44,7 @@ export default function PrivacyPage() {
                     <h2 className="text-xl font-bold mb-4 border-b border-gray-200 pb-2">5. お問い合わせ窓口</h2>
                     <p>
                         本ポリシーに関するお問い合わせは、以下の窓口までお願いいたします。<br />
-                        Eメール: support@example.com
+                        Eメール: info@acalist.jp
                     </p>
                 </section>
             </div>
