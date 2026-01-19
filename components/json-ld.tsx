@@ -17,6 +17,13 @@ export default function JsonLd() {
                 "description": "企業SNSのリスト作成を好きな条件で好きなだけ。会員登録不要で即購入可能な営業リスト作成ツールです。",
             },
             {
+                "@type": "Organization",
+                "name": "Acalist（アカリスト）",
+                "url": "https://acalist.jp",
+                "logo": "https://acalist.jp/logo.png",
+                "image": "https://acalist.jp/logo.png"
+            },
+            {
                 "@type": "FAQPage",
                 "mainEntity": [
                     {

@@ -8,6 +8,10 @@ export const metadata: Metadata = {
     title: "アカリスト | 企業SNSリスト作成ツール",
     description: "企業SNS（Instagram/インスタ・TikTok・YouTube・X）の営業リスト作成ツール。フォロワー数やアカウント有無で絞り込み、会員登録不要で即ダウンロード。1件15円からの高精度な企業リスト。",
     keywords: ["SNS", "TikTok", "Instagram", "インスタ", "YouTube", "営業リスト", "フォロワー", "アカウント", "企業リスト", "Acalist"],
+    icons: {
+        icon: '/icon.png',
+        apple: '/icon.png',
+    },
     metadataBase: new URL('https://acalist.jp'),
     openGraph: {
         title: "アカリスト | 企業SNSリスト作成ツール",
