@@ -44,6 +44,9 @@ export async function POST(req: Request) {
             mode: 'payment',
             success_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.get('origin')}/`,
+            invoice_creation: {
+                enabled: true,
+            },
             metadata: {
                 filters: JSON.stringify(filters),
                 item_count: count.toString(),
