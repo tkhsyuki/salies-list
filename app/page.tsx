@@ -23,7 +23,7 @@ export default function Home() {
         try {
             let query = supabase
                 .from('companies')
-                .select('*', { count: 'estimated' });
+                .select('*', { count: 'exact' });
 
             // Apply filters
             // Apply filters

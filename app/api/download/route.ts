@@ -65,7 +65,7 @@ export async function GET(req: Request) {
             });
         }
 
-        const { data: companies, error } = await query;
+        const { data: companies, error } = await query.limit(50000);
 
         if (error || !companies) {
             console.error('Database error:', error);
