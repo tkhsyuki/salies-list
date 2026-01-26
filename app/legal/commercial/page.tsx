@@ -26,7 +26,7 @@ export default function CommercialPage() {
                             <th className="bg-gray-50 px-6 py-4 font-medium">お問い合わせ</th>
                             <td className="px-6 py-4">
                                 info@acalist.jp<br />
-                                <span className="text-xs text-gray-500">※電話番号については、特定商取引法に基づき、消費者からの請求がある場合、遅滞なく開示いたします。</span>
+                                050-1725-6235
                             </td>
                         </tr>
                         <tr>
