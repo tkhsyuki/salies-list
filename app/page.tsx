@@ -20,6 +20,17 @@ export default function Home() {
         setLoading(true);
         setSearched(true);
         setCurrentFilters(filters);
+
+        // Smooth scroll to results
+        setTimeout(() => {
+            const resultsEl = document.getElementById('results');
+            if (resultsEl) {
+                // Offset for sticky header
+                const y = resultsEl.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        }, 100);
+
         try {
             let query = supabase
                 .from('companies')
@@ -111,46 +122,67 @@ export default function Home() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+        <div className="min-h-screen bg-white text-gray-900 font-sans">
             <JsonLd />
-            {/* Header */}
-            <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+            {/* Header (Transparent/Overlay or Sticky) */}
+            <header className="bg-white/90 backdrop-blur-md border-b border-gray-100 sticky top-0 z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <img src="/logo.png" alt="Acalist Logo" className="w-8 h-8 rounded-lg object-contain" />
-                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-lime-600 to-emerald-600">
-                            アカリスト
+                        {/* <img src="/logo.png" alt="Acalist Logo" className="w-8 h-8 rounded-lg object-contain" /> */}
+                        {/* Text Logo for Uber style simplicity */}
+                        <span className="text-2xl font-black tracking-tighter text-[#06C167]">
+                            Acalist.
                         </span>
                     </div>
-                    <nav className="text-sm font-medium text-gray-500">
-                        For Marketers & Sales
+                    <nav className="text-sm font-bold text-gray-600">
+                        <button className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition-colors hidden sm:block">
+                            For Enterprise
+                        </button>
                     </nav>
                 </div>
             </header>
 
-            <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-                <div className="text-center mb-10">
-                    <h1 className="text-4xl font-extrabold text-gray-900 mb-4 sm:text-5xl">
-                        SNSアカウントを持つ企業のリストを<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-500 to-emerald-500">
-                            会員登録不要で即ダウンロード
-                        </span>
-                    </h1>
-                    <p className="max-w-xl mx-auto text-lg text-gray-600">
-                        業種・地域・フォロワー数など、好きな条件でピンポイント検索。<br />
-                        営業に必要なリストを、1件15円から今すぐ入手できます。
-                    </p>
+            <main className="flex-1">
+                {/* Hero Section */}
+                <div className="relative bg-[#06C167] pt-16 pb-32 lg:pt-24 lg:pb-40 overflow-hidden">
+                    {/* Decorative Elements */}
+                    <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+                    <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-black/5 rounded-full blur-3xl"></div>
+
+                    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="max-w-4xl">
+                            <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+                                営業リスト作成を、<br className="hidden md:block" />
+                                <span className="text-black/80">もっとシンプルに。</span>
+                            </h1>
+                            <p className="text-lg md:text-xl text-white/90 mb-10 font-bold max-w-2xl">
+                                SNSアカウント（Instagram, TikTok, YouTube）を持つ企業を検索。<br />
+                                会員登録不要。1件15円。即ダウンロード。
+                            </p>
+
+                            {/* Search Form Container */}
+                            <div className="bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] p-2 md:p-6 transform transition-transform hover:scale-[1.005]">
+                                <SearchForm onSearch={fetchCompanies} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Left: Search Form */}
-                    <div className="lg:col-span-7">
-                        <SearchForm onSearch={fetchCompanies} />
-                    </div>
+                {/* Results Anchor */}
+                <div id="results" className="scroll-mt-24"></div>
 
-                    {/* Right: Preview & Purchase */}
-                    <div className="lg:col-span-5 relative">
-                        <div className="sticky top-24">
+                {/* Main Content Area */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                    {/* Results Section */}
+                    {searched && (
+                        <div className="mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
+                            <div className="flex items-center justify-between mb-8">
+                                <h2 className="text-3xl font-bold text-gray-900">検索結果</h2>
+                                {/* You could put sort options here */}
+                            </div>
+
+                            {/* Uses ResultPreview but ideally we'd restyle it to be full width or a grid of cards */}
+                            {/* For now, just render it. The component itself might need 'w-full' tweaking */}
                             <ResultPreview
                                 count={totalCount}
                                 loading={loading}
@@ -158,11 +190,13 @@ export default function Home() {
                                 onCheckout={handleCheckout}
                             />
                         </div>
+                    )}
+
+                    {/* LP Sections (Always visible or only when not searched? Uber keeps scrolling for info) */}
+                    <div className={searched ? "mt-24" : "mt-0"}>
+                        <LpSections />
                     </div>
                 </div>
-
-                {/* LP Sections (Features, Steps, FAQ) */}
-                <LpSections />
             </main>
         </div>
     );

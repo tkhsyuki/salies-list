@@ -46,8 +46,8 @@ export default function SearchForm({ onSearch }: { onSearch: (filters: SearchFil
     };
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-lime-100">
-            <div className="space-y-6">
+        <div className="h-full">
+            <div className="space-y-8">
                 {/* SNS Channels (Moved to Top) */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center flex-wrap gap-2">
