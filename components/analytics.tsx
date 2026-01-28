@@ -4,8 +4,11 @@ import Script from 'next/script';
 
 export default function Analytics() {
     const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+    const ADS_ID = 'AW-17913025594';
 
-    if (!GA_ID) {
+    const MAIN_ID = GA_ID || ADS_ID;
+
+    if (!MAIN_ID) {
         return null;
     }
 
@@ -13,7 +16,7 @@ export default function Analytics() {
         <>
             <Script
                 strategy="afterInteractive"
-                src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+                src={`https://www.googletagmanager.com/gtag/js?id=${MAIN_ID}`}
             />
             <Script
                 id="google-analytics"
@@ -23,9 +26,8 @@ export default function Analytics() {
                         window.dataLayer = window.dataLayer || [];
                         function gtag(){dataLayer.push(arguments);}
                         gtag('js', new Date());
-                        gtag('config', '${GA_ID}', {
-                            page_path: window.location.pathname,
-                        });
+                        ${GA_ID ? `gtag('config', '${GA_ID}', { page_path: window.location.pathname });` : ''}
+                        ${ADS_ID ? `gtag('config', '${ADS_ID}');` : ''}
                     `,
                 }}
             />
