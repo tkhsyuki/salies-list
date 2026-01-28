@@ -52,15 +52,15 @@ export async function GET(req: Request) {
             filters.sns.forEach(sns => {
                 if (sns === 'instagram') {
                     query = query.not('insta_url', 'is', null);
-                    if (filters.minFollowers) query = query.gte('insta_followers', filters.minFollowers);
+                    query = query.gte('insta_followers', filters.minFollowers || 1);
                 }
                 if (sns === 'tiktok') {
                     query = query.not('tiktok_url', 'is', null);
-                    if (filters.minFollowers) query = query.gte('tiktok_followers', filters.minFollowers);
+                    query = query.gte('tiktok_followers', filters.minFollowers || 1);
                 }
                 if (sns === 'youtube') {
                     query = query.not('youtube_url', 'is', null);
-                    if (filters.minFollowers) query = query.gte('youtube_subscribers', filters.minFollowers);
+                    query = query.gte('youtube_subscribers', filters.minFollowers || 1);
                 }
             });
         }

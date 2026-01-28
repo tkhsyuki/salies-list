@@ -55,20 +55,20 @@ export default function Home() {
                 query = query.or(orClause);
             }
 
-            // SNS Filters: Check if URL is not null
+            // SNS Filters: Check if URL is not null AND followers > 0 (or user specified min)
             if (filters.sns.length > 0) {
                 filters.sns.forEach(sns => {
                     if (sns === 'instagram') {
                         query = query.not('insta_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('insta_followers', filters.minFollowers);
+                        query = query.gte('insta_followers', filters.minFollowers || 1);
                     }
                     if (sns === 'tiktok') {
                         query = query.not('tiktok_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('tiktok_followers', filters.minFollowers);
+                        query = query.gte('tiktok_followers', filters.minFollowers || 1);
                     }
                     if (sns === 'youtube') {
                         query = query.not('youtube_url', 'is', null);
-                        if (filters.minFollowers) query = query.gte('youtube_subscribers', filters.minFollowers);
+                        query = query.gte('youtube_subscribers', filters.minFollowers || 1);
                     }
                 });
             }
