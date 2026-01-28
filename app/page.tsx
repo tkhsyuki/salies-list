@@ -106,7 +106,33 @@ export default function Home() {
 
             const data = await response.json();
             if (data.url) {
-                window.location.href = data.url;
+                // Google Ads Conversion Tracking (Purchase)
+                const reportConversion = (url: string) => {
+                    let called = false;
+                    const callback = () => {
+                        if (!called) {
+                            called = true;
+                            window.location.href = url;
+                        }
+                    };
+
+                    const gtag = (window as any).gtag;
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-17913025594/GWmkCOv8s-4bELqozN1C',
+                            'value': 1.0,
+                            'currency': 'JPY',
+                            'transaction_id': '',
+                            'event_callback': callback
+                        });
+                        // Fallback timeout in case callback doesn't fire
+                        setTimeout(callback, 2000);
+                    } else {
+                        callback();
+                    }
+                };
+
+                reportConversion(data.url);
             } else {
                 alert('決済セッションの作成に失敗しました。');
             }
