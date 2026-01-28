@@ -2,169 +2,125 @@ import { Share2, Zap, UserX, Search, CheckCircle, CreditCard, Download, HelpCirc
 
 export default function LpSections() {
     return (
-        <div className="space-y-24 py-20">
-            {/* Features Section */}
-            <section>
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                        アカリスト が選ばれる3つの理由
+        <div className="space-y-32 py-24">
+            {/* Features Section - Bento/Grid Style */}
+            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">
+                        Why Acalist?
                     </h2>
-                    <p className="text-gray-600">
-                        マーケティングリスト作成の手間をゼロに。
+                    <p className="text-xl text-gray-500 max-w-2xl mx-auto font-medium">
+                        マーケティングを加速させる、最適なリスト作成体験。
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-6">
-                            <Share2 className="w-8 h-8" />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {/* Feature 1 */}
+                    <div className="bg-white p-10 rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300 flex flex-col items-start group">
+                        <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-900 mb-8 group-hover:bg-[#06C167] group-hover:text-white transition-colors duration-300">
+                            <Share2 className="w-7 h-7" />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">SNS活用企業に特化</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            X, Instagram（インスタ）, TikTokなど、SNSアカウントを持つ企業のみを厳選。インフルエンサーマーケティングやSNS広告の営業先に最適です。
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">SNS活用企業に特化</h3>
+                        <p className="text-gray-600 leading-relaxed">
+                            Instagram, TikTok, YouTubeなど、SNSをアクティブに運用している企業のみを厳選。
+                            従来の企業データベースにはない「発信力のある企業」にリーチできます。
                         </p>
                     </div>
 
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-6">
-                            <Zap className="w-8 h-8" />
+                    {/* Feature 2 */}
+                    <div className="bg-gray-900 p-10 rounded-3xl border border-gray-800 shadow-xl flex flex-col items-start text-white relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/5 rounded-full blur-3xl group-hover:bg-[#06C167]/20 transition-colors duration-500"></div>
+                        <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-8 relative z-10">
+                            <Zap className="w-7 h-7" />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">1件15円の低価格</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            月額費用は一切不要。必要なリストを必要な分だけ、業界最安値水準の1件15円で購入できます。
+                        <h3 className="text-2xl font-bold mb-4 relative z-10">圧倒的な低コスト</h3>
+                        <p className="text-gray-400 leading-relaxed relative z-10">
+                            月額費用・初期費用は一切不要。<br />
+                            必要なリストを、必要な時に、<br />
+                            <span className="text-[#06C167] font-bold">1件15円</span> という業界最安水準で購入可能です。
                         </p>
                     </div>
 
-                    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-                        <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center text-purple-500 mb-6">
-                            <UserX className="w-8 h-8" />
+                    {/* Feature 3 */}
+                    <div className="bg-white p-10 rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow duration-300 flex flex-col items-start group">
+                        <div className="w-14 h-14 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-900 mb-8 group-hover:bg-[#06C167] group-hover:text-white transition-colors duration-300">
+                            <UserX className="w-7 h-7" />
                         </div>
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">会員登録不要</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            面倒な会員登録や審査は一切ありません。検索からダウンロードまで最短5分で完了します。
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4">会員登録不要</h3>
+                        <p className="text-gray-600 leading-relaxed">
+                            面倒な商談や審査、会員登録は一切ありません。
+                            検索から決済、ダウンロードまでWeb上で完結。
+                            今すぐリストが必要なその瞬間に応えます。
                         </p>
                     </div>
                 </div>
             </section>
 
             {/* How it works Section */}
-            <section className="bg-gray-900 text-white py-20 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold sm:text-4xl">
-                            ご利用の流れ
-                        </h2>
-                        <p className="mt-4 text-xl text-gray-400">
-                            4ステップで即座にリストを入手できます。
+            <section className="bg-gray-50 py-24 border-y border-gray-200">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+                        <div>
+                            <span className="text-[#06C167] font-bold tracking-wider uppercase text-sm">How it works</span>
+                            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mt-3 tracking-tight">
+                                4ステップで、手元に。
+                            </h2>
+                        </div>
+                        <p className="text-xl text-gray-500 font-medium md:max-w-md">
+                            複雑な手続きは一切不要。<br />
+                            今すぐに営業活動を開始できます。
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        <div className="relative">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <Search className="w-8 h-8 text-blue-400" />
-                                </div>
-                                <div className="text-sm font-bold text-blue-400 mb-2">STEP 01</div>
-                                <h3 className="text-xl font-bold mb-2">条件で検索</h3>
-                                <p className="text-gray-400 text-sm">
-                                    業種、地域、SNSの種類などで<br />ターゲット企業を検索
-                                </p>
-                            </div>
-                            <div className="hidden md:block absolute top-8 -right-4 text-gray-600">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                            </div>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                        {/* Connecting Line (Hidden on mobile) */}
+                        <div className="hidden md:block absolute top-[2.5rem] left-0 right-0 h-0.5 bg-gray-200 -z-10"></div>
 
-                        <div className="relative">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <CheckCircle className="w-8 h-8 text-lime-400" />
+                        {[
+                            { step: '01', title: '検索', desc: '業種・地域・SNSでターゲットを絞り込み', icon: Search },
+                            { step: '02', title: '確認', desc: '件数と見積もり金額を即座にプレビュー', icon: CheckCircle },
+                            { step: '03', title: '決済', desc: 'クレジットカードで安全に決済完了', icon: CreditCard },
+                            { step: '04', title: 'DL', desc: 'CSVファイルを即座にダウンロード', icon: Download },
+                        ].map((item, idx) => (
+                            <div key={idx} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm relative group hover:-translate-y-1 transition-transform duration-300">
+                                <div className="w-20 h-20 bg-white border-4 border-gray-50 rounded-full flex items-center justify-center text-gray-900 mb-6 mx-auto md:mx-0 shadow-sm group-hover:border-[#06C167] transition-colors duration-300">
+                                    <item.icon className="w-8 h-8" />
                                 </div>
-                                <div className="text-sm font-bold text-lime-400 mb-2">STEP 02</div>
-                                <h3 className="text-xl font-bold mb-2">件数・金額確認</h3>
-                                <p className="text-gray-400 text-sm">
-                                    抽出された件数と金額を確認<br />（5件までプレビュー可能）
+                                <div className="text-xs font-black text-gray-300 mb-2">STEP {item.step}</div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                                <p className="text-sm text-gray-500 leading-relaxed font-medium">
+                                    {item.desc}
                                 </p>
                             </div>
-                            <div className="hidden md:block absolute top-8 -right-4 text-gray-600">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                            </div>
-                        </div>
-
-                        <div className="relative">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <CreditCard className="w-8 h-8 text-emerald-400" />
-                                </div>
-                                <div className="text-sm font-bold text-emerald-400 mb-2">STEP 03</div>
-                                <h3 className="text-xl font-bold mb-2">お支払い</h3>
-                                <p className="text-gray-400 text-sm">
-                                    クレジットカードで<br />安全に決済（Stripe連携）
-                                </p>
-                            </div>
-                            <div className="hidden md:block absolute top-8 -right-4 text-gray-600">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-                            </div>
-                        </div>
-
-                        <div className="relative">
-                            <div className="text-center">
-                                <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-700">
-                                    <Download className="w-8 h-8 text-lime-500" />
-                                </div>
-                                <div className="text-sm font-bold text-lime-500 mb-2">STEP 04</div>
-                                <h3 className="text-xl font-bold mb-2">ダウンロード</h3>
-                                <p className="text-gray-400 text-sm">
-                                    決済完了後、すぐに<br />CSVファイルをダウンロード
-                                </p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* FAQ Section */}
-            <section className="max-w-4xl mx-auto px-4">
+            <section className="max-w-3xl mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                    <h2 className="text-3xl font-bold text-gray-900">
                         よくある質問
                     </h2>
                 </div>
 
-                <div className="space-y-6">
-                    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-lime-600" />
-                            領収書は発行されますか？
-                        </h3>
-                        <p className="text-gray-600 ml-7">
-                            クレジットカード決済完了後にStripeより送信されるメールを領収書代わりとしてご利用いただけます。
-                            インボイス制度対応の領収書が必要な場合は、お問い合わせフォームよりご連絡ください。
-                        </p>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-lime-600" />
-                            どのような企業データが含まれていますか？
-                        </h3>
-                        <p className="text-gray-600 ml-7">
-                            独自のクローリング技術により収集した、公開されている企業情報です。
-                            特にSNSアカウント（X, Instagram, TikTok等）の有無やフォロワー数の情報に特化しています。
-                        </p>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-                        <h3 className="font-bold text-lg text-gray-900 mb-2 flex items-center gap-2">
-                            <HelpCircle className="w-5 h-5 text-lime-600" />
-                            最低購入件数はありますか？
-                        </h3>
-                        <p className="text-gray-600 ml-7">
-                            はい、システム利用料の関係上、最低100件（1,500円）からのご購入とさせていただいております。
-                            検索結果が100件未満の場合は条件を緩和して再検索してください。
-                        </p>
-                    </div>
+                <div className="space-y-4">
+                    {[
+                        { q: '領収書は発行されますか？', a: '決済完了後にStripeより送信されるメールを領収書としてご利用いただけます。適格請求書が必要な場合はお問い合わせください。' },
+                        { q: 'どのような企業データが含まれていますか？', a: '公式サイト等から収集した公開情報です。特にSNSアカウント（Instagram, TikTok, YouTube）の有無に特化しています。' },
+                        { q: '最低購入件数はありますか？', a: 'システムの都合上、最低100件（1,500円）からのご購入とさせていただいております。' }
+                    ].map((item, i) => (
+                        <div key={i} className="bg-white p-6 rounded-2xl border border-gray-200 hover:border-gray-300 transition-colors">
+                            <h3 className="font-bold text-lg text-gray-900 mb-3 flex items-start gap-3">
+                                <HelpCircle className="w-6 h-6 text-[#06C167] flex-shrink-0 mt-0.5" />
+                                {item.q}
+                            </h3>
+                            <p className="text-gray-600 ml-9 leading-relaxed">
+                                {item.a}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </section>
         </div>
