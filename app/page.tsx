@@ -29,7 +29,7 @@ export default function Home() {
                 const y = resultsEl.getBoundingClientRect().top + window.scrollY - 80;
                 window.scrollTo({ top: y, behavior: 'smooth' });
             }
-        }, 100);
+        }, 500);
 
         try {
             let query = supabase
@@ -135,9 +135,6 @@ export default function Home() {
                         </span>
                     </div>
                     <nav className="text-sm font-bold text-gray-600">
-                        <button className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition-colors hidden sm:block">
-                            For Enterprise
-                        </button>
                     </nav>
                 </div>
             </header>
@@ -150,9 +147,9 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-black/5 rounded-full blur-3xl"></div>
 
                     <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="max-w-4xl">
+                        <div className="max-w-5xl mx-auto">
                             <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-                                営業リスト作成を、<br className="hidden md:block" />
+                                SNSアカウントのリスト作成を<br className="hidden md:block" />
                                 <span className="text-black/80">もっとシンプルに。</span>
                             </h1>
                             <p className="text-lg md:text-xl text-white/90 mb-10 font-bold max-w-2xl">
