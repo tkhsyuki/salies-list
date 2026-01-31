@@ -12,7 +12,8 @@ export async function GET() {
         'テックイノベーション株式会社,システム開発業界の会社,大阪府大阪市...,50,https://tech-sample.jp,,0,https://tiktok.com/@tech,1200,https://youtube.com/c/tech,500',
         'カフェ・デ・サンプル,ホテル・旅館業界の会社,京都府京都市...,10,https://cafe-sample.net,https://instagram.com/cafe,3000,,,,0',
         '', // Empty row separator
-        '※SNS列は、検索条件で選択したSNSのみダウンロードされます。未選択のSNS列は実際の購入データには含まれません。,,,,,,,,,,,,'
+        '※SNS列は、検索条件で選択したSNSのみダウンロードされます。未選択のSNS列は実際の購入データには含まれません。,,,,,,,,,,,,',
+        '※記載のデータはサンプル企業です。実際のデータは実在する企業のデータが記載されたデータになります,,,,,,,,,,,,'
     ];
 
     const csvContent = '\uFEFF' + [headers, ...rows].join('\n'); // Add BOM
